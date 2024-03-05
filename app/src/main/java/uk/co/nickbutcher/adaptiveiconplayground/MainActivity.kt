@@ -29,7 +29,6 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.VelocityTracker
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -40,6 +39,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.FloatRange
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.dynamicanimation.animation.FloatPropertyCompat
 import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.loader.app.LoaderManager
@@ -149,6 +149,9 @@ class MainActivity : AppCompatActivity() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
+        splashScreen.setKeepOnScreenCondition { (adapter?.itemCount ?: 0) == 0 }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val res = resources
@@ -239,7 +242,6 @@ class MainActivity : AppCompatActivity() {
 
                     override fun onLoadFinished(loader: Loader<List<AdaptiveIconDrawable>>,
                                                 data: List<AdaptiveIconDrawable>) {
-                        findViewById<View>(R.id.loading).visibility = GONE
                         adapter = IconAdapter(data, corners[0])
                         grid.adapter = adapter
                         grid.setOnTouchListener(gridTouch)

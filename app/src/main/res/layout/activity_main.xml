@@ -35,13 +35,6 @@
         app:layoutManager="GridLayoutManager"
         app:spanCount="@integer/spans" />
 
-    <ProgressBar
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:indeterminate="true" />
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/settings_sheet"
         android:layout_width="match_parent"
